@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <form actions="" method="post">
+        {% csrf_token %}
+        
+        {{ form.as_p }}
+
+        {% if register %}
+        <input type="submit" value="Зарегистри">
+        {% else %}
+        <input type="submit" value="Войти">
+        {% endif %}
+        
+    </form>
+{% endblock %}

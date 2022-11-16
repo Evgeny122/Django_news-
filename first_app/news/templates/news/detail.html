@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ block.super }} - {{ single_object.article }}
+{% endblock %}
+
+{% block content %}
+<h5>Author: {{ single_object.author }}</h5>
+<h1>{{ single_object.article }}</h1>
+
+{% include 'news/detail_snippet.html' with single_object=single_object %}
+
+{% if perms.user.is_staff %}
+    <a href="/news/edit/{{ single_object.pk }}">Изменить</a>
+    <a href="/news/delete/{{ single_object.pk }}">Удалить</a>
+{% endif %}
+
+{% endblock %}
