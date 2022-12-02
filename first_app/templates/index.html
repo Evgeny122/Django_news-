@@ -6,12 +6,13 @@
 
 {% for news in news_list %}
     <h1>
-        <a href="id/{{ news.id }}">{{ news.article }}</a>
+        <a href="news/{{ news.id }}">{{ news.article }}</a>
     </h1>
 {% endfor %}
 
-<h1>Create News</h1>
-<a href="news/create">Create</a>
-
+{% if request.user.is_staff %}
+    <h1>Create News</h1>
+    <a href="news/create">Create</a>
+{% endif %}
 
 {% endblock %}

@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -5,27 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}News app{% endblock %}</title>
-    <style>
-        body {
-            margin: 0;
-        }
-        nav {
-            padding: 1.5em;
-            background-color: #002651;
-        }
-
-        nav a{
-            color: #fff;
-            text-decoration: none;
-        }
-
-        nav{
-            padding: 1.45em;
-            background-color: #002651;
-            display: flex;
-            justify-content: space-between;
-        }
-    </style>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
 </head>
 <body>
     {% include 'navbar.html' %}

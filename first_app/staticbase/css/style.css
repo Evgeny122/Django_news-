@@ -1,0 +1,19 @@
+body {
+    margin: 0;
+}
+nav {
+    padding: 1.5em;
+    background-color: #002651;
+}
+
+nav a{
+    color: #fff;
+    text-decoration: none;
+}
+
+nav{
+    padding: 1.45em;
+    background-color: #002651;
+    display: flex;
+    justify-content: space-between;
+}

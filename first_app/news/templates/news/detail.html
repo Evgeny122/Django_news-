@@ -8,11 +8,46 @@
 <h5>Author: {{ single_object.author }}</h5>
 <h1>{{ single_object.article }}</h1>
 
+
+<h5>Commentaries</h5>
+{% for c in single_object.commentary.all %}
+    <p>
+    {{ c.date.time }} /
+    {{ c.user }} /
+    {{ c.text }} 
+
+    {% if c.user == user or request.user.is_staff %}
+        <a href="/news/commentary/edit/{{ c.pk }}/">Изменить</a> |
+        <a href="/news/commentary/delete/{{ c.pk }}">Удалить</a>
+    {% endif %}
+    
+    
+    </p>
+
+{% endfor %}
+
+
 {% include 'news/detail_snippet.html' with single_object=single_object %}
+
+<h5>Likes: {{ single_object.get_likes }}</h5>
+<form action="/news/like/{{ single_object.pk }}/" method="post">
+    {% csrf_token %}
+    {% if not liked %}
+        <input type="submit" value="Лайк">
+    {% else %}
+        <input type="submit" value="Дизлайк">
+    {% endif %}
+</form>
+
 
 {% if perms.user.is_staff %}
     <a href="/news/edit/{{ single_object.pk }}">Изменить</a>
     <a href="/news/delete/{{ single_object.pk }}">Удалить</a>
 {% endif %}
+
+{% if user.is_authenticated %}
+    <a href="/news/commentary/{{ single_object.pk }}">Комментировать</a>
+{% endif %}
+
 
 {% endblock %}

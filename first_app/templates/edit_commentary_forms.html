@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Edit - {{ single_object.text }}
+{% endblock %}
+
+{% block content %}
+<h1>Edit commentary</h1>
+
+<!-- добавить автора -->
+<h5> Author : {{ single_object.user }} </h5> 
+
+{{ single_object.text }}
+<form action="" method="post">
+
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    <input type="submit" value="Изменить">
+</form>
+{% endblock %}
+    

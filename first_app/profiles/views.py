@@ -22,15 +22,12 @@ def login_view(request):
 
 def register_view(request):
     form = RegisterForm(request.POST or None)
-    print(form)
-
     if form.is_valid():
         user_name = form.cleaned_data.get('username')
         password = form.cleaned_data.get('password')
         email = form.cleaned_data.get('email')
         user = User.objects.create_user(user_name, email, password, is_staff=False)
         user.save()
-        print(user_name, password, email)
         return redirect('/')
     return render(request, 'profiles/form.html', {'form': form, 'register' : True})
 

@@ -1,11 +1,13 @@
 from django import forms
-from .models import News
+from .models import News, Commentaries
 
 class NewsModelForm(forms.ModelForm):
     class Meta:
         model = News
         fields = [
-            'article', 'body',
+            'article', 
+            'body',
+            'image',
         ]
 
     def clean_article(self):
@@ -13,3 +15,10 @@ class NewsModelForm(forms.ModelForm):
         if len(data) < 5:
             raise forms.ValidationError('Article is not long enough')
         return data
+
+class CommentaryModelForm(forms.ModelForm):
+    class Meta:
+        model = Commentaries
+        fields = [
+            'text'
+        ]
