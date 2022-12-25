@@ -124,5 +124,9 @@ STATICFILES_DIRS = [
     BASE_DIR / 'staticbase',
 ]
 
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR / 'staticbase' / 'media'
+
 LOGIN_URL = '/login'
 LOGIN_REDIRECT_URL = '/'

@@ -24,7 +24,9 @@ from news.views import (
     commentary_view_delete, 
     commentary_view_edit, 
     likes_view)
-from profiles.views import logout_view, login_view, register_view
+from profiles.views import logout_view, login_view, register_view, detail_user_view
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
@@ -41,4 +43,5 @@ urlpatterns = [
     path('news/commentary/delete/<int:pk>/', commentary_view_delete),
     path('news/commentary/edit/<int:pk>/', commentary_view_edit),
     path('news/like/<int:pk>/', likes_view),
-]
+    path('profile/<int:pk>/', detail_user_view, name='profile'),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

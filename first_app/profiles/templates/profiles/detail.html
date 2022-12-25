@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}
+{{ block.super }} - {{ profile }}
+{% endblock %}
+
+{% block content %}
+
+<form action="" method="post" enctype="multipart/form-data">
+    
+    {% csrf_token %}
+
+    {{ form.as_p }}
+
+    
+
+    {% if not profile.userinformation.profile_image %}
+        <input type="submit" value="Добавить">
+    {% else %}
+        <input type="submit" value="Изменить">
+    {% endif %}
+</form>
+
+{% if profile.userinformation.profile_image %}
+    <img src="{{ profile.userinformation.profile_image.url }}" alt="{{ profile.userinformation.bio }}" width="100">
+{% endif %}
+
+
+<h1> {{ profile }}</h1>
+{% if profile.userinformation.bio %}
+    <h1>bio: {{ profile.userinformation.bio }}</h1>
+{% else %}
+    <h1>No bio</h1>
+{% endif %}
+
+{% endblock %}

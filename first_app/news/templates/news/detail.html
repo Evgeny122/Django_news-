@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 
+{% load static %}
+
 {% block title %}
 {{ block.super }} - {{ single_object.article }}
 {% endblock %}
@@ -8,10 +10,19 @@
 <h5>Author: {{ single_object.author }}</h5>
 <h1>{{ single_object.article }}</h1>
 
+{% if single_object.image %}
+    <img src="{% static single_object.image.url %}" alt="{{ single_object.article }}" height="400">
+{% endif %}
+
 
 <h5>Commentaries</h5>
 {% for c in single_object.commentary.all %}
     <p>
+
+    {% if c.user.userinformation.profile_image %}
+        <img src="{{ c.user.userinformation.profile_image.url }}" alt="{{ c.user }}" width="50">
+    {% endif %}
+
     {{ c.date.time }} /
     {{ c.user }} /
     {{ c.text }} 
@@ -29,15 +40,16 @@
 
 {% include 'news/detail_snippet.html' with single_object=single_object %}
 
-<h5>Likes: {{ single_object.get_likes }}</h5>
-<form action="/news/like/{{ single_object.pk }}/" method="post">
-    {% csrf_token %}
-    {% if not liked %}
+<h5>Likes: {{ single_object.get_likes }}     |     Don't Likes:  {{ single_object.get_dont_likes }}</h5>
+
+{% if user.is_authenticated %}
+    <form action="/news/like/{{ single_object.pk }}/" method="post">
+        {% csrf_token %}
+        
         <input type="submit" value="Лайк">
-    {% else %}
         <input type="submit" value="Дизлайк">
-    {% endif %}
-</form>
+    </form>
+{% endif %}
 
 
 {% if perms.user.is_staff %}

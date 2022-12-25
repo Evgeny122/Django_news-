@@ -1,11 +1,17 @@
 {% extends "base.html" %}
 
 {% block content %}
-    <form actions="" method="post">
+    <form actions="" method="post", enctype="multipart/form-data">
         {% csrf_token %}
         
         {{ form.as_p}}
         
         <input type="submit" value="Создать">
     </form>
+
+{% if obj.get_image_name %}
+    <h1>
+        <mark>image: {{ obj.get_image_name }} added successfully</mark>
+    </h1>
+{% endif %}
 {% endblock %}

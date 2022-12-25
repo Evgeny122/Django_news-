@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth import get_user_model
+from .models import UserInformation
 
 User = get_user_model()
 
@@ -39,3 +40,11 @@ class RegisterForm(forms.Form):
             raise forms.ValidationError('Invalid usermane')
         return profile
 
+class ProfileModelForm(forms.ModelForm):
+    class Meta:
+        model = UserInformation
+        fields = [
+            'bio',
+            'profile_image', 
+        ]
+        
