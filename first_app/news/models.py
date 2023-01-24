@@ -30,7 +30,11 @@ class News(models.Model):
     likes = models.ManyToManyField(Likes)
     dnot_likes = models.ManyToManyField(Dnot_likes)
     image = models.ImageField(upload_to='news_images/', default='news_images/default_news.jpg')
-    image_thumbnail = models.ImageField(upload_to="news_images/", null=True, blank=True)
+    image_thumbnail = models.ImageField(
+        upload_to="news_images/",
+        default = "news_images/news_images_thumb.jpg",
+        null=True, 
+        blank=True)
     
     def __str__(self):
         return self.article
@@ -55,11 +59,10 @@ class News(models.Model):
         FILE_TYPE = thumb_extension[1:]
         if FILE_TYPE == 'JPG':
             FILE_TYPE = 'JPEG'
-        print(thumb_name)
-        print(thumb_extension)
-        print(thumb_filename)
+    
         temp_thumb = BytesIO()
-
+        if thumb_filename == 'news_images_thumb.jpg':
+            return
         image.save(temp_thumb, FILE_TYPE)
         temp_thumb.seek(0)
         self.image_thumbnail.save(thumb_filename, ContentFile(temp_thumb.read()), save=False)
