@@ -6,7 +6,7 @@
 
 {% for news in news_list %}
     {% if news.image_thumbnail %}
-        <img src="{{ news.image_thumbnail.url }}" alt="{{ news.article }}thumbnail">
+        <img src="{{ news.image_thumbnail.url }}" alt="{{ news.article }}thumbnail" width="40">
     {% endif %}
     <h1>
         <a href="news/{{ news.id }}">{{ news.article }}</a>
